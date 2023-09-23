@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>iOSSupport</title>
+		<meta name=viewport content='width=device-width, initial-scale=1.0, user-scalable=no, minium-scalable=1.0, maximum-scalable=1.0' charset="utf-8"/>
+		<meta property="og:title" content="iOSSupport">
+		<meta name="description" content="Một chợ ứng dụng bên thứ ba cho iPhone của bạn.">
+		<meta property="og:description" content="Một chợ ứng dụng bên thứ ba cho iPhone của bạn.">
+		<meta property="og:image" content="logo.png">
+		<meta property="og:site_name" content="iOSSupport">
+		<link rel=stylesheet href="css/intro.min.css">
+		<link rel=stylesheet href="css/bootstrap.min.css">
+		<script src="js/polyfill-0.1.42.min.js"></script>
+		<script src="js/sweetalert2.min.js"></script>
+		<link rel=stylesheet href="css/sweetalert2.min.css">
+		<style>img[alt="www.000webhost.com"]{display:none};</style>
+		<style>.disclaimer{display:none;}</style>
+		<script data-ad-client="ca-pub-5225403282775559" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<style>
+@media (min-width: 576px){
+  .bg-sm-light {
+    background-color: #f8f9fa !important;
+  }
+  .text-sm-dark {
+    color: #343a40 !important;
+  }
+
+  .\w500 {
+    width: 500px !important;
+  }
+}
+</style>
+<script>
+//    alert('Chỉ có làm, chịu khó\nCần cù thì bù siêng năng\nChỉ có làm thì mới có ăn\nNhững cái loại không làm mà đòi có ăn\nThì ăn Trộm, ăn Cắp nhá!\n\nTHẰNG QUYỀN ĐBRR!')
+function donate(){
+	swal({
+	title: '-Bùi Kiến Quốc-',
+	html: '<b>Momo:</b> 0582267858<br><b>MB Bank:</b> 2750108920005',
+    imageUrl: 'logo.png',
+    imageHeight: 100,
+    imageWidth: 100,
+    confirmButtonText: "",
+ })
+}
+function oldapp(){
+	swal({
+	title: 'Ứng Dụng Phiên Bản Cũ',
+	text: 'Hỗ trợ iOS thấp nhất có thể. Hãy để ý mục Compatibility của ứng dụng để biết thêm chi tiết',
+    type: 'info',
+    confirmButtonText: '',
+ })
+}
+function paidapp(){
+	swal({
+	title: 'Ứng Dụng Trả Phí',
+	text: 'Các ứng dụng trả phí sẽ được đánh dấu bằng từ (Paid) ngay sau tên ứng dụng',
+    type: 'info',
+    confirmButtonText: '',
+ })
+}
+function otherapp(){
+	swal({
+	title: 'Ứng Dụng 3rd',
+	text: 'Sẽ có vài ứng dụng yêu cầu phải JailBreak máy và cài Appsync. Các ứng dụng này sẽ được đánh dấu bằng từ (Appsync) ngay sau tên ứng dụng',
+    type: 'info',
+    confirmButtonText: '',
+ })
+}
+function play(){
+	var audio = document.getElementById("audio");
+    audio.play();
+}
+function oldstore(){
+	window.location = "oldstore"
+}
+function block(){
+	window.location = "blockupdate.mobileconfig"
+}
+function repo(){
+	window.location = "repo"
+	<!--alert('COM BACK SOON')-->
+}
+function yt(){
+	window.open('https://www.youtube.com/c/Mo%CC%A3tTa%CC%81o?sub_confirmation=1', '_blank')
+}
+function apple(){
+		window.location = "jbme.html"
+}
+function passwords(){
+		window.location = "store/.html"
+}
+</script>
+	</head>
+	<body>
+	<div id="app" class="wow fadeIn animated" hidden>
+		<section>
+			<nav class="navbar navbar-expand-sm navbar-sm fixed-top navbar-dark bounceInDown animated bg-dark">
+				<a class="navbar-brand" onClick="window.location.reload()"><img style="width:40px;height:40px;cursor:pointer" src="logo.png"/></a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav nav nav-tabs w-100 justify-content-around">
+						<li class="nav-item">
+							<a class="nav-link bind-scroll" href="#home">Trang chủ</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link bind-scroll" href="#core-features">Chức Năng</a>
+						</li>
+	  					<li class="nav-item">
+							<a class="nav-link bind-scroll" href="#about-the-app">Hướng Dẫn</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link bind-scroll" href="#screenshoot">Ảnh Màn Hình</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link bind-scroll" href="#contact">Liên Hệ</a>
+						</li>
+						<li class="nav-item">
+							<a onclick="donate()" class="nav-link bind-scroll">Donate</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</section>
+
+	<section class="bg-main">
+		<div class="container">
+			<div class="row text-center pb-5 text-light pt-7" id="home">
+				<div class="col-12 mt-5">
+					<img onclick="play()" src="intro.png" class="icon-app wow swing" style="border-radius:1.2rem;border:#000 solid"><br><audio id="audio" src="bruh.mp3"></audio><br>
+					<p class="h3 fadeInDown wow" style="color:#000;text-shadow: 0 0 0.5em #fff, 0 0 0.5em #fff">- iOSSupport -<br>Legacy AppStore</p>
+					<p class="fadeInUp wow" style="color:#000;text-shadow: 0 0 0.5em #fff, 0 0 0.5em #fff"><b>Chợ ứng dụng phiên bản thấp. Hỗ trợ các dòng iPhone/iOS đời cũ.<br><i>(Non-JailBreak/JailBroken)</i></b></p>
+					<!--<p class="btn-20 wow bounceInLeft install">
+						Install
+					</p><br>-->
+					<p class="btn-OS6 wow bounceInRight use-now">
+						iOS8&Above
+					</p><br>
+					<p class="btn-repo wow bounceInRight" onclick="repo()">
+						Cydia Repo
+					</p><br>
+					<p class="btn-ota wow bounceInLeft" onclick="block()">
+						<strike>Block iOS Update</strike>
+					</p>
+					<!-- lightSpeedIn -->
+				</div>
+				<div class="col-12 tada wow">
+					<img src="https://i.imgur.com/LGLbT9H.png" class="w-100 border-0 w500" onclick="yt()" style="cursor:pointer"/>
+				</div>
+			</div>
+		</div>
+	</section>
+		<section class="container">
+			<!-- cor false aturs -->
+			
+			<div class="row text-md center text-xl-center text-lg-center wow fadeInDown text-center" id="core-features">
+				<div class="col-12 mt-5">
+					<h4 class="py-3 border-60">CHỨC NĂNG CHÍNH</h4>
+				</div>
+				<div class="col-12 row m-0 p-0">
+					<div class="feature col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 wow flipInX">
+						<img onclick="oldapp()" src="svgs/oldapp.svg" style="border-radius:50%;background-color:#80489E;cursor:pointer"/>
+						<h5>Old Applications</h5>
+						<p>iOS Support cung cấp các ứng dụng phiên bản thấp nhất có thể cho hầu hết iDevices</p>
+					</div>
+					
+					<div class="feature col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 wow flipInX">
+						<img onclick="paidapp()" src="svgs/paidapp.svg" style="border-radius: 50%;background-color:#80489E;cursor:pointer"/>
+						<h5>Paid Applications</h5>
+						<p>Hỗ trợ người dùng tải xuống các ứng dụng trả phí từ apple 1 cách hoàn toàn MIỄN PHÍ</p>
+					</div>
+					
+					<div class="feature col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 wow flipInX">
+						<img onclick="otherapp()" src="svgs/otherapp.svg" style="border-radius: 50%;background-color:#80489E;cursor:pointer"/>
+						<h5>Deleted/3rd Applications</h5>
+						<p>Cung cấp cho người dùng một số ứng dụng đã bị xoá hoặc không tồn tại trên Appstore.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row text-md center text-xl-center text-lg-center wow fadeInUp" id="about-the-app">
+				<div class="col-12 mt-5">
+					<h4 class="py-3 border-60">Thông Tin Ứng Dụng</h4><br>
+				</div>
+				
+				<div class="col-12 col-xl-6 col-lg-6 bounceInLeft wow text-center">
+					<iframe width="100%" height="100%" src="https://www.youtube.com/embed/6OU98QFpRYw" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-color:#80489E"></iframe>
+				</div>
+				
+				<div class="col-xl-6 col-lg-6 col-12">
+					
+					<div class="col-12 col-xl-6 col-lg-6 wow text-justify bounceInRight">
+						<h5 class="text-center"><br>Hướng Dẫn Sử Dụng</h5>
+						<div class="text-secondary">
+							<p> 1. Ấn vào nút <b>Install</b> bên trên để tiến hành cài <i>"Chợ ứng dụng"(Legacy AppStore)</i> lên thiết bị của bạn.</p>
+							<p>2. Chọn ứng dụng và phiên bản sao cho phù hợp với thiết bị của mình và bấm <i>"Download"</i> để tiến hành cài đặt ứng dụng mà bạn đã chọn lên thiết bị. </p>
+							<p>3. Truy cập ứng dụng sau khi quá trình tải hoàn tất, nếu có thông báo yêu cầu nhập ID Apple hiện lên thì hãy nhấn nút <b>Get ID</b> để lấy tài khoản điền vào nhé!. </p>
+							<p style="color:white"><i>*Nếu bị văng khi vào ứng dụng thì hãy lấy tài khoản bên dưới đăng nhập vào mục iTunes&AppStore <u>(KHÔNG PHẢI iCLOUD)</u> trong cài đặt và vào AppStore tải 1 app bất kỳ trong mục đã mua là được. <U>TUYỆT ĐỐI KHÔNG ĐĂNG NHẬP TÀI KHOẢN CỦA WEB VÀO iCLOUD.</U></i></p><button onclick="passwords()" class="btn btn-blue float-right wow flipInX" style="color:#fff;box-shadow:0px 0px 10px 6px#fff">Get ID</button> <!--"iossp()"-->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row text-md center text-xl-center text-lg-center wow fadeInDown" id="screenshoot">
+				<div class="col-12 mt-5">
+					<h4 class="py-3 border-60">Ảnh Màn Hình</h4>
+				</div>
+				
+				<div class="col-12 wow bounceIn">
+
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+
+<script>
+!function () {
+    var html = "", i = 0
+    for (; i < 6; i++)
+    	html += '<div class="swiper-slide text-center">\
+			<img src="screenshoot/' + (i + 1) + '.png" class="w-100 w500">\
+		</div>'
+	document.write(html)
+}(void 0)
+</script>
+
+    					</div>
+    <!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="row text-md center text-xl-center text-lg-center wow fadeInUp" id="contact">
+				<div class="col-12 mt-5">
+					<h4 class="py-3 border-60">Liên Hệ</h4>
+				</div>
+				
+				<div class="col-12 row p-0 m-0">
+					<a href="https://facebook.com/groups/iossp.fb" class="feature feature-sm col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 text-center wow rotateInDownLeft">
+						<img title="https://facebook.com/groups/iossp.fb" src="svgs/fb.svg">
+					</a>
+					
+					<a href="tel://0582267858" class="feature feature-sm col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 text-center wow rotateIn">
+						<img title="0582267858" src="svgs/phone.svg">
+					</a>
+
+					<a href="mailto:iossp@hotmail.com" class="feature feature-sm col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 text-center wow rotateInUpRight">
+						<img title="iossp@hotmail.com" src="svgs/email.svg">
+					</a>
+				</div>
+				
+			</div>
+		</section>
+		
+		<section class="container mt-3 py-3 text-center wow pulse text-secondary" data-wow-iteration="1" data-wow-duration="0.5s">
+			<div class="row">
+				<div class="col-12">
+					Copyright 2020 Mọt<a onClick="apple()">. Made by 16DDS0603227
+				</div>
+			</div>
+		</section>
+	</div>
+		<script src="js/identifier.min.js"></script>
+		<link rel="stylesheet" href="css/animate.min.css">
+		<script src="js/wow.min.js"></script>
+		<script src="js/bootstrap-native.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<link rel=stylesheet href="css/swiper.min.css">
+		<script src="js/my.js"></script>
+		<script src="js/libmy.js"></script>
+		<script src="js/intro.min.js"></script>
+	</body>
+</html>

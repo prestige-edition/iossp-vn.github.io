@@ -1,0 +1,23 @@
+﻿body {
+    background-color:white;
+    font-family: Tahoma;
+    font-size:12pt;
+}
+
+.error {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.45098) 0 1px 1px, rgba(0, 0, 0, 0.0666667) 0 0 30px inset;
+    background-image: none;
+    background-color: #DAECF4;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.45098) 0 1px 1px, rgba(0, 0, 0, 0.0666667) 0 0 30px inset;
+    margin: auto;
+    margin-top: 200px;
+    max-width: 400px;
+    min-width: 350px;
+    padding: 10px;
+    text-align: center;
+    color:red;
+}

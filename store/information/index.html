@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LegacyAppStore</title>
+		<link rel=stylesheet href="style.min.css"></link>
+		<meta name=viewport content='width=device-width, initial-scale=1.0, user-scalable=no, minium-scalable=1.0, maximum-scalable=1.0' charset="utf-8"/>
+		<script src="../../js/polyfill-0.1.42.min.js"></script>
+		<link rel=stylesheet href="../../css/bootstrap.min.css"></link>
+        <style>img[alt="www.000webhost.com"]{display:none};</style>
+        <style>.disclaimer{display:none;}</style>
+	</head>
+	<body>
+
+	<div id = "preloader" class="bg-main">
+		<img src="../svgs/boot.svg" />
+	</div>
+	<div id = "no-package" class="container w-100 h-100 fixed-top bg-main" hidden>
+		<div class="row text-center page-error my-5">
+			<div class="col-12">
+				<a href="https://ipamarket.github.io/" class="mt-5 text-secondary text-middle">
+					<img style="width:7rem;height:7rem;margin-bottom:1rem" src="../../logo.png" />
+				</a>
+				<h6>
+					Không tìm thầy ứng dụng
+				</h6>
+				<div class="small text-secondary">
+<B>iOS Support</B> hiện không tìm thấy ứng dụng này trên cơ sở lưu trữ.
+				</div>
+				<div class="row mt-3">
+					<div class="col-6 col-sm-12">
+						<button class="btn btn-light border btn-sm btn-block" onclick="location.reload()" style="color: #008EFF">Thử lại</button>
+					</div>
+					<div class="col">
+						<a class="btn text-light border btn-sm btn-block" style="background-color: #008EFF" href="https://ipamarket.github.io/store/">Về Store</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<section class="container" v-if="!!inforApp.app" hidden id="app">
+			<div class="row" v-if="viewer == 'webclip'">
+				<div class="col-12 py-2 border-bottom" @click="back()" style="font-weight: 600;">
+					&lt; Back
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-4 col-sm-3 col-md-3 col-lg-2 col-xl-2">	
+					<img class="icon" v-lazy="inforApp.app.icon" :key="inforApp.app.icon">
+				</div>
+				<div class="col position-relative">
+					<div class="h5 t-0 position-absolute">
+						{{ inforApp.app.name }}
+					</div>
+					<div class="small-14 text-secondary b-0 position-absolute">
+						<span>{{ sizeof(inforApp.app.size) }}</span> | <span v-if="inforApp.app.infor"> {{ inforApp.app.infor.developer }}</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Information -->
+			<div class="row mt-5" v-if="!!inforApp.app.infor">
+				<div class="col-12 text-bold h6 mb-0">
+					Information
+				</div>
+				<div class="col-12">
+					<table class="table table-sm w3-7 border-0">
+						<tr v-for="(val, key) in inforApp.app.infor" class="border-0">
+							<td class="text-secondary text-capitalize border-0 small-14"> {{ key }} </td>
+							<td class="border-0 small-14"> {{ val }} </td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Screenshoot -->
+			<div class="row mt-3" v-if="!!inforApp.app.screenshoot">
+				<div class="col-12 text-bold h6 mb-0">
+					Screenshoot
+				</div>
+				<div class="col-12 mt-3">
+					<div class="scroll">
+						<img class="img-fluid screenshoot ml-3 border" v-lazy="url" v-img="{ group: 'screenshoot', src: url }" v-for="url in inforApp.app.screenshoot" :key="inforApp.app.icon + url"/>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Description -->
+			<div class="row mt-3" v-if="!!inforApp.app.description">
+				<div class="col-12 text-bold h6 mb-0 icon-more" @click.prevent="$set(inforApp, 'isOpenDescription', !inforApp.isOpenDescription)">
+					Description
+				</div>
+				<div class="col-12 mt-3 small-14 text-secondary detail-close detail-open" v-html="marked(inforApp.app.description)">
+
+				</div>
+			</div>
+			
+			<!-- hot app -->
+			<transition-group name="fade-app" tag="div" class="row mt-3">
+<!-- $root = vue root -->
+				<div class="col-12 mt-3 h6" :key="'title'">
+					You may be interested in
+				</div>
+				<div class="col-3 col-sm-4 col-lg-2 col-xl-1 mb-3 text-center" v-for="(app, key) in inforApp.hotTrens" :key="equalKey(key)" @click="$root.goto(key, app)">
+					<img class="img-fluid icon-sm" v-lazy="app.icon" style="border-radius: 10px"/>
+					<div class="limit-line-1 small-80 text-bold mt-1">
+						{{ app.name }}
+					</div>
+				</div>
+			</transition-group>
+			
+			<div class="row py-1 download fixed-bottom bg-light">
+				<div class="col-12">
+					<div class="input-group input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Version</span>
+						</div>
+						<select class="form-control custom-select" ref="select-link">
+							<option v-for="(link, ver) in parseJSON(inforApp.app.versions)"
+:value="link"> {{ ver }} </option>
+						</select>
+						<div class="input-group-append">
+							<button class="btn rounded-0" style="color: rgb(255, 255, 255); background-color: rgb(128, 72, 158)" @click="open($refs['select-link'].value)"> Download </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script src="../../js/mystore.js" async></script>
+		<script src="../../js/libmy.js"></script>
+		<script src="../../js/vue.min.js" async></script>
+		<script src="../../js/vue-lazyload.min.js" async></script>
+		<script src="../../js/v-img.min.js" async></script>
+		<script src="../../js/search.params.min.js" async></script>
+		<link rel=stylesheet href="../../css/limit-line.min.css"></link>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js" async></script>
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+		<script src="script.min.js"></script>
+
+	</body>
+</html>
