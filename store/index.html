@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>iOS Support</title>
-		<link rel=stylesheet href="../css/style.min.css"></link>
+		<title>LegacyAppStore</title>
+		<link rel=stylesheet href="../css/store.min.css"></link>
 		<script src="../js/polyfill-0.1.42.min.js"></script>
 		<link rel=stylesheet href="../css/bootstrap.min.css"></link>
 		<meta name=viewport content='width=device-width, initial-scale=1.0, user-scalable=no, minium-scalable=1.0, maximum-scalable=1.0' charset="utf-8"/>
-
+		<meta property="og:title" content="iOS Support">
+		<meta name="description" content="Application SPA của iOS Support (Web Clip).">
+		<meta property="og:description" content="iOS Support - Support For Old iOS">
+		<meta property="og:image" content="/intro.png">
+		<meta property="og:site_name" content="iOS Support Application">
 <script>
 onerror = console.error = console.warn = function (e) {
    alert([].slice.call(arguments).join(" | "))
 }</script>
-
-
+<style>img[alt="www.000webhost.com"]{display:none};</style>
+<style>.disclaimer{display:none;}</style>
 	</head>
 	<body>
 
-	<div id = "preloader" class="bg-light">
-		<img src="../gif/preloader.gif" />
+	<div id = "preloader" class="bg-main">
+		<img src="svgs/boot.svg" />
 	</div>
 	
 	<div id="app" hidden>
@@ -58,9 +62,9 @@ onerror = console.error = console.warn = function (e) {
 	<input class="form-control outline-none"
 		type="text"
 		placeholder="Search"
-		style="border-radius: 20px;"
+		style="border-radius: 5px;"
 		ref="inputSearch"
-		v-model="search.keyword"
+		v-model.trim="search.keyword"
 		@keydown.enter="searchPlease">
 	<span class="cancel"
 		v-if="search.keyword" 
@@ -74,10 +78,19 @@ onerror = console.error = console.warn = function (e) {
 			</div>
 			
 			<!-- key hot -->
-			<div class="row mt-5">
-				<div class="col-12">
-					<span class="keyword-hot-item" v-for="keyword in search.keywordHot"
-@click="searchUseKeywordHot($event.target)"> {{ keyword }} </span>
+			<div class="row mt-3 mb-5">
+				<div class="col-12" v-if="search.history.length">
+					<p class="small"> History Search <span class="float-right" @click="clearHistorySearch" style="font-size: 1rem"> &times; </span> </p>
+					<div class="mx-1 mt-2 d-inline py-1 px-2 text-primary"
+		v-for="(keyword, index) in search.history"
+			@click="searchUseKeywordHot($event.target)"
+		v-if="index <= 5"
+		style="font-size: 14px;"
+		:key="index"
+		:data-value="keyword"> {{ limitKeyword(keyword) }} </div>
+				</div>
+				<div class="col-12 small" v-else>
+					No history search
 				</div>
 			</div>
 			
@@ -89,13 +102,13 @@ onerror = console.error = console.warn = function (e) {
 		<!-- information app -->
 		<section class="container" v-else-if="tabSelect == 'inforApp'">
 			<div class="row" v-if="viewer == 'webclip'">
-				<div class="col-12 py-2 border-bottom" @click="back()" style="font-weight: 600;">
-					&lt; Back
+				<div class="col-12 py-2 border-bottom" @click="back()" style="font-weight: 600">
+					<img src="../store/svgs/back.svg" style="height:1.3rem"> Back
 				</div>
 			</div>
 			<div class="row mt-3">
 				<div class="col-4 col-sm-3 col-md-3 col-lg-2 col-xl-2">	
-					<img class="icon border" :src="inforApp.app.icon" :key="inforApp.app.icon">
+					<img class="icon" :src="inforApp.app.icon" :key="inforApp.app.icon">
 				</div>
 				<div class="col position-relative">
 					<div class="h5 t-0 position-absolute">
@@ -110,7 +123,7 @@ onerror = console.error = console.warn = function (e) {
 			<!-- Information -->
 			<div class="row mt-5" v-if="!!inforApp.app.infor">
 				<div class="col-12 text-bold h6 mb-0">
-					Thông tin ứng dụng
+					Information
 				</div>
 				<div class="col-12">
 					<table class="table table-sm w3-7 border-0">
@@ -125,11 +138,11 @@ onerror = console.error = console.warn = function (e) {
 			<!-- Screenshoot -->
 			<div class="row mt-3" v-if="!!inforApp.app.screenshoot">
 				<div class="col-12 text-bold h6 mb-0">
-					Screenshoots
+					Screenshoot
 				</div>
 				<div class="col-12 mt-3">
 					<div class="scroll">
-						<img class="img-fluid screenshoot ml-3 border" :src="url" v-for="url in inforApp.app.screenshoot" :key="inforApp.app.icon + url"/>
+						<img class="img-fluid screenshoot ml-3 border" :src="url" v-img="{ group: 'screenshoot', src: url }" v-for="url in inforApp.app.screenshoot" :key="inforApp.app.icon + url"/>
 					</div>
 				</div>
 			</div>
@@ -137,7 +150,7 @@ onerror = console.error = console.warn = function (e) {
 			<!-- Description -->
 			<div class="row mt-3" v-if="!!inforApp.app.description">
 				<div class="col-12 text-bold h6 mb-0 icon-more" @click.prevent="$set(inforApp, 'isOpenDescription', !inforApp.isOpenDescription)">
-					Mô tả
+					Description
 				</div>
 				<div class="col-12 mt-3 small-14 text-secondary detail-close detail-open" v-html="marked(inforApp.app.description)">
 
@@ -151,7 +164,7 @@ onerror = console.error = console.warn = function (e) {
 					You may be interested in
 				</div>
 				<div class="col-3 col-sm-4 col-lg-2 col-xl-1 mb-3 text-center" v-for="(app, key) in inforApp.hotTrens" :key="equalKey(key)" @click="$root.goto(key, app)">
-					<img class="img-fluid icon-sm border" :src="app.icon" style="border-radius: 10px"/>
+					<img class="img-fluid icon-sm" :src="app.icon" style="border-radius: 10px"/>
 					<div class="limit-line-1 small-80 text-bold mt-1">
 						{{ app.name }}
 					</div>
@@ -162,14 +175,14 @@ onerror = console.error = console.warn = function (e) {
 				<div class="col-12">
 					<div class="input-group input-group-sm">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Phiên bản</span>
+							<span class="input-group-text">Version</span>
 						</div>
 						<select class="form-control custom-select" ref="select-link">
 							<option v-for="(link, ver) in JSON.parse('{' + decodeURIComponent(atob(inforApp.app.versions)) + '}')"
 :value="link"> {{ ver }} </option>
 						</select>
 						<div class="input-group-append">
-							<button class="btn btn-primary rounded-0" @click="open($refs['select-link'].value)"> Tải xuống </button>
+							<button class="btn rounded-0" style="color:#fff;background-color:#80489E" @click="open($refs['select-link'].value)"> Download </button>
 						</div>
 					</div>
 				</div>
@@ -178,22 +191,22 @@ onerror = console.error = console.warn = function (e) {
 		
 		<!-- toolbar -->
 		
-		<section class="container fixed-bottom bg-light py-1 toolbar" v-if="tabSelect != 'inforApp'">
+		<section class="container fixed-bottom bg-light py-1 toolbar" v-if="tabSelect != 'inforApp'" style="border-radius:1em 1em 0 0;background-image:-webkit-linear-gradient(top, #8c9cbf 0%, #546a9e 30%, #153153 30%, #091636 100%);border:2px solid;border-bottom:none">
 			<div class="row">
 				<div class="col-3 text-center line-height-0" @click="switchT('hot')">
-						<img :src="'svg/home' + (tabSelect == 'hot' ? '-selected.svg' : '.svg')" /><br>
+						<img :src="'svgs/home' + (tabSelect == 'hot' ? '-selected.svg' : '.svg')" /><br>
 						<small class="text-secondary">Home</small>
 				</div>
 				<div class="col-3 text-center line-height-0" @click="switchT('game')" @click.once="load('game')">
-						<img :src="'svg/game' + (tabSelect == 'game' ? '-selected.svg' : '.svg')" /><br>
-						<small class="text-secondary">Game</small>
+						<img :src="'svgs/game' + (tabSelect == 'game' ? '-selected.svg' : '.svg')" /><br>
+						<small class="text-secondary">Non-JB</small>
 				</div>
 				<div class="col-3 text-center line-height-0" @click="switchT('app')" @click.once="load('app')">
-						<img :src="'svg/app' + (tabSelect == 'app' ? '-selected.svg' : '.svg')" /><br>
-						<small class="text-secondary">App</small>
+						<img :src="'svgs/app' + (tabSelect == 'app' ? '-selected.svg' : '.svg')" /><br>
+						<small class="text-secondary">iPAs</small>
 				</div>
 				<div class="col-3 text-center line-height-0" @click="tabSelect = 'search'">
-						<img :src="'svg/search' + (tabSelect == 'search' ? '-selected.svg' : '.svg')" /><br>
+						<img :src="'svgs/search' + (tabSelect == 'search' ? '-selected.svg' : '.svg')" /><br>
 						<small class="text-secondary">Search</small>
 				</div>
 			</div>
@@ -214,7 +227,7 @@ onerror = console.error = console.warn = function (e) {
 					<img class="icon-sm" :src="app.icon" />
 				</div>
 	<!-- icon !important -->
-				<div class="col py-2 ml-2">
+				<div class="col ml-2" style="margin-left:1rem!important">
 					<div class="text-bold small limit-line-2">
 						<b>{{ app.name }}</b>
 					</div>
@@ -233,22 +246,26 @@ onerror = console.error = console.warn = function (e) {
 	:autoplay-timeout=3000 
 	:border=0
 	:autoplay-hover-pause=true
-	:height=120
+	:height="120"
 	:width="240"
+	:background="'#00000000'"
 	v-if="swipers.length">
 	<slide v-for="(slide, i) in swipers" :index="i" :key="slide + i">
-	  <img :src=slide style="border-radius:15px;height:100%"/>
+	  <img :src=slide style="border-radius: 15px" width="100%" height="100%" class="py-1" />
 	</slide>
 </carousel-3d>
 				</transition>
 			</div>
+<a onclick="getid()" style="text-decoration:none;color:#000">
+<div class="container col-12 h5 text-bold text-center" style="background-image:radial-gradient(circle, #e2b5ff, #dfb0f6, #dbaaed, #d7a5e4, #d3a0db, #c992d1, #be84c8, #b476be, #9f5cb2, #8a42a6, #72279b, #580190);box-shadow:0px 0px 10px 6px#fff;border-radius:6px;width:50%">GetID</div>
+</a>
 			<transition-group name="fade-app" tag="div" class="row">
 <!-- $root = vue root -->
-				<div class="col-12 mt-3 h5 text-bold" :key="'title'">
-					<img src="svg/hot.svg" /> Hot
+				<div class="col-12 mt-3 h6 text-bold" :key="'title'" style="font-family: courier">
+					<img src="svgs/hot.svg"  onClick="window.location.reload()"/> Hot
 				</div>
-				<div class="col-3 col-sm-4 col-lg-2 col-xl-1 mb-3 text-center" v-for="(app, key) in appsHot" :key="equalKey(key)" @click="$root.goto(key, app)">
-					<img class="img-fluid icon-sm" :src="app.icon" style="border-radius: 10px"/>
+				<div class="col-3 col-sm-3 col-lg-2 col-xl-1 mb-3 text-center" v-for="(app, key) in appsHot" :key="equalKey(key)" @click="$root.goto(key, app)">
+					<img class="img-fluid icon-sm w-min-3 h-min-3" :src="app.icon" style="border-radius: 10px"/>
 					<div class="limit-line-1 small-80 text-bold mt-1">
 						{{ app.name }}
 					</div>
@@ -260,30 +277,39 @@ onerror = console.error = console.warn = function (e) {
 			</preview-app>
 			
 			<!-- button load -->
-			<div class="my-3 row text-primary text-center">
-				<div class="col-12" v-if="isLoaded" @click="$emit('more')">
-					<div>Thêm</div>
-					<img src="svg/more.svg" class="loading" />
+			<div class="my-3 row text-center" style="color:#80489E">
+				<div class="col-12" v-if="isLoaded === true" @click="$emit('more')" style="cursor:pointer">
+					<div>More</div>
+					<img src="svgs/more.svg" class="loading" />
+				</div>
+				<div class="col-12" v-else-if="isLoaded === false">
+					<div>Loading...</div>
+					<img src="svgs/loading.svg" width="25px" height="25px"/>
 				</div>
 				<div class="col-12" v-else>
-					<div>Đang tải...</div>
-					<img src="svg/loading.svg" style="width:1.5rem;height:1.5rem"/>
+					<div>Updating </div>
 				</div>
 			</div>
 		</section>
 	</template>
-
-		<script src="../js/my.js" async></script>
+	<script>
+		function getid(){
+			alert('Tham gia nhóm Facebook: IOS Support - Hội Người Dùng iPhone/iOS/Apps Phiên Bản Cũ VN để lấy tài khoản kích hoạt')
+			window.open('https://www.facebook.com/groups/iossp.fb')
+		}
+	</script>
+		<script src="../js/mystore.js" async></script>
 		<script src="../js/libmy.js" async></script>
 		<script src="../js/search.params.min.js" async></script>
 		<script src="../js/vue.min.js" async></script>
-		<link rel=stylesheet href="/css/limit-line.min.css"></link>
+		<script src="../js/vue-lazyload.min.js" async></script>
+		<script src="../js/v-img.min.js" async></script>
+		<link rel=stylesheet href="../css/limit-line.min.css"/>
 		<script src="../js/vue-carousel-3d.min.js" async></script>
 		<script src="../js/marked.min.js" async></script>
-		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js" async></script>
-		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-database.js" async></script>
-		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js" async></script>
-		<script src="script.min.js"></script>
-
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+		<script src="../js/store.min.js"></script>
 	</body>
 </html>

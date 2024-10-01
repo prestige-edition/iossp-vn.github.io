@@ -6,8 +6,8 @@
     <g id="切图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="02---Lite" transform="translate(-311.000000, -46.000000)">
             <g id="编组-3" transform="translate(311.000000, 46.000000)">
-                <polyline id="路径-4" stroke="#6196FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 9 8 13 13 9"></polyline>
-                <polyline id="路径-4" stroke-opacity="0.6" stroke="#548DFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 4 8 8 13 4"></polyline>
+                <polyline id="路径-4" stroke="#a85cd1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 9 8 13 13 9"></polyline>
+                <polyline id="路径-4" stroke-opacity="0.6" stroke="#a85cd1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 4 8 8 13 4"></polyline>
                 <rect id="ic_more" x="0" y="0" width="16" height="16"></rect>
             </g>
         </g>
